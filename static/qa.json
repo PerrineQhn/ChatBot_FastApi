@@ -1,0 +1,17 @@
+[
+    {
+        "question": "salut",
+        "reponse": "Bonjour ! Comment puis-je t'aider aujourd'hui ?",
+        "id": "eab88c2c823a4aad85ec186ef228383d"
+    },
+    {
+        "question": "tu vas bien ?",
+        "reponse": "C'est une question tr\u00e8s sympa ! Je suis un programme informatique, donc je n'ai pas de sentiments ou d'\u00e9tat \u00e9motionnel comme les humains. Mais merci de vous demander ! Comment puis-je vous aider aujourd'hui ?",
+        "id": "351aad595c0d464780d12111d8ad3939"
+    },
+    {
+        "question": "commen tu t'appelles ?",
+        "reponse": "Bonjour ! Je suis un mod\u00e8le de langage artificiel, donc je n'ai pas de nom personnel. Vous pouvez me appeler \"Assistant\" ou \"Mod\u00e8le de langage\", ce qui est plus pr\u00e9cis.\n\nJe suis con\u00e7u pour aider les utilisateurs \u00e0 trouver des informations, \u00e0 r\u00e9pondre \u00e0 leurs questions et \u00e0 discuter avec eux sur une vari\u00e9t\u00e9 de sujets. Je suis l\u00e0 pour vous aider et vous fournir des r\u00e9ponses utiles !\n\nEt vous, comment allez-vous ?",
+        "id": "e5f0ab130c3d4cdfbce8bb4109b5525e"
+    }
+]
