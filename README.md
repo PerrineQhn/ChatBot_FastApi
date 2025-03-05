@@ -121,7 +121,7 @@ ChatBot_FastApi/
 Pour lancer l'application (soyez dans le dossier `ChatBot_FastApi/`):
 
 ```bash
-uvicorn app:app --reload
+uvicorn app:app
 ```
 
 L'application sera accessible à l'adresse [http://127.0.0.1:8000](http://127.0.0.1:8000) (indiqué dans le terminal).
