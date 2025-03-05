@@ -21,8 +21,6 @@ Chatbot IA est une application web basée sur FastAPI qui propose un chatbot int
 - [Configuration](#configuration)
 - [Lancement de l'application](#lancement-de-lapplication)
 - [Fonctionnalités](#fonctionnalités)
-- [Dépannage](#dépannage)
-- [Licence](#licence)
 
 ---
 
