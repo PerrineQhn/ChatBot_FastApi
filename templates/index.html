@@ -1,21 +1,36 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Chatbot IA</title>
-        <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
-    </head>
-    <body>
-        <div class="chat-container">
-            <h1>Chatbot IA</h1>
-            <form method="post" action="{{ url_for('ask_bot')}}">
-                <label for="user_input">Votre question :</label>
-                <input type="text" id="user_input" name="user_input" required>
-                <button type="submit">Envoyer</button>
-            </form>
-            {% block content %}
-            {% endblock %}
-        </div>
-    </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chatbot IA</title>
+  
+  <!-- Import d'une police moderne (facultatif) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  
+  <!-- Lien vers la feuille de style -->
+  <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+</head>
+<body>
+  <div class="chat-wrapper">
+    <header class="chat-header">
+      <h1>Chatbot <img src="{{ url_for('static', path='logo.svg') }}" alt="Logo Chatbot" class="chat-logo"/> </h1>
+    </header>
+    <main class="chat-messages" id="chat-messages">
+      {% block content %}
+      {% endblock %}
+    </main>
+    <footer class="chat-input">
+      <form id="chat-form" method="post" action="{{ url_for('ask_bot') }}">
+        <input type="text" id="user_input" name="user_input" placeholder="Entrez votre question..." required autocomplete="off" />
+        <button type="submit">Envoyer</button>
+      </form>
+    </footer>
+  </div>
+  
+  <!-- Script JS pour gérer le défilement automatique, etc. -->
+  <script src="{{ url_for('static', path='script.js') }}"></script>
+</body>
 </html>

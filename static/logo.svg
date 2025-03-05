@@ -1,0 +1,30 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Bulle de discussion -->
+  <path
+    d="M 30,20 
+    H 98 
+    Q 108,20 108,30 
+    V 80 
+    Q 108,90 98,90 
+    H 50 
+    L 30,110 
+    L 30,90 
+    Q 20,90 20,80 
+    V 30 
+    Q 20,20 30,20 
+    Z"
+    fill="#007BFF"
+  />
+  <!-- Texte "AI" au centre -->
+  <text
+    x="50%"
+    y="50%"
+    text-anchor="end"
+    fill="#fff"
+    font-size="30"
+    font-family="Arial, sans-serif"
+    dy=".3em"
+  >
+    AI
+  </text>
+</svg>

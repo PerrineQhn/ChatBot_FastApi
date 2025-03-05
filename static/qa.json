@@ -1,17 +1,14 @@
 [
     {
-        "question": "salut",
-        "reponse": "Bonjour ! Comment puis-je t'aider aujourd'hui ?",
-        "id": "eab88c2c823a4aad85ec186ef228383d"
+        "question": "Que peut tu me dire aujourd'hui ?",
+        "reponse": "Bonjour ! Je suis ravi de pouvoir discuter avec toi. Aujourd'hui, je peux partager des informations sur une large gamme de sujets, allant de la science et de l'histoire \u00e0 la culture et aux tendances actuelles.\n\nSi tu as un sujet sp\u00e9cifique en t\u00eate, n'h\u00e9site pas \u00e0 me le demander. Je serai ravi de t'aider ou de te fournir des informations utiles.\n\nEn attendant, voici quelques id\u00e9es de sujets que je peux aborder :\n\n- Des actualit\u00e9s et tendances actuelles\n- Des informations sur les sciences et la technologie\n- Des r\u00e9sum\u00e9s d'histoires et de l\u00e9gendes\n- Des conseils et astuces pour am\u00e9liorer ta vie quotidienne\n- Des discussions sur les arts, la musique et la culture\n\nQu'est-ce qui t'int\u00e9resse ?",
+        "id": "7a592ee9a3e542578be0727a63039b83",
+        "timestamp": "2025-03-05T20:57:22.758463Z"
     },
     {
-        "question": "tu vas bien ?",
-        "reponse": "C'est une question tr\u00e8s sympa ! Je suis un programme informatique, donc je n'ai pas de sentiments ou d'\u00e9tat \u00e9motionnel comme les humains. Mais merci de vous demander ! Comment puis-je vous aider aujourd'hui ?",
-        "id": "351aad595c0d464780d12111d8ad3939"
-    },
-    {
-        "question": "commen tu t'appelles ?",
-        "reponse": "Bonjour ! Je suis un mod\u00e8le de langage artificiel, donc je n'ai pas de nom personnel. Vous pouvez me appeler \"Assistant\" ou \"Mod\u00e8le de langage\", ce qui est plus pr\u00e9cis.\n\nJe suis con\u00e7u pour aider les utilisateurs \u00e0 trouver des informations, \u00e0 r\u00e9pondre \u00e0 leurs questions et \u00e0 discuter avec eux sur une vari\u00e9t\u00e9 de sujets. Je suis l\u00e0 pour vous aider et vous fournir des r\u00e9ponses utiles !\n\nEt vous, comment allez-vous ?",
-        "id": "e5f0ab130c3d4cdfbce8bb4109b5525e"
+        "question": "Aurevoir",
+        "reponse": "Au revoir ! J'esp\u00e8re avoir pu te rendre service ou t'avoir donn\u00e9 quelques id\u00e9es pour discuter. N'h\u00e9site pas \u00e0 me contacter si tu as besoin de quelque chose d'autre.\n\n\u00c0 bient\u00f4t !",
+        "id": "9d592d73a7c44417a8c4dda9b5d4a124",
+        "timestamp": "2025-03-05T21:01:27.747942Z"
     }
 ]

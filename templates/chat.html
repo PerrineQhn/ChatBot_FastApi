@@ -1,9 +1,11 @@
 {% extends "index.html" %}
 {% block content %}
-    <div class="chat-response">
-        {% for qa in donnee %}
-            <p><strong>Vous :</strong> {{ qa.question }}</p>
-            <p><strong>Bot :</strong> {{ qa.reponse }}</p>
-        {% endfor %}
+  {% for qa in donnee %}
+    <div class="chat-message user-message">
+      <p><b>Vous</b> : {{ qa.question }}</p>
     </div>
+    <div class="chat-message bot-message">
+      <p><b>Bot</b> : {{ qa.reponse }}</p>
+    </div>
+  {% endfor %}
 {% endblock %}
