@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Request, Form
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, JSONResponse
 import json
 import os
 import datetime
@@ -39,9 +39,6 @@ conversation_context = []
 question_reponse = []
 question_reponse_file = BASE_DIR / "static/qa.json"
 
-with open(question_reponse_file, "w") as f:
-    json.dump([], f)
-
 class QA(BaseModel):
     question: str
     reponse: str
@@ -65,7 +62,6 @@ def util_ajouter_QA(qa: QA):
     # Génération d'un ID unique et d'un timestamp
     qa.id = uuid4().hex
     qa.timestamp = datetime.datetime.now().isoformat() + "Z"
-
     qa.question = safe_text(qa.question)
     qa.reponse = safe_text(qa.reponse)
 
@@ -75,20 +71,66 @@ def util_ajouter_QA(qa: QA):
     # Sauvegarde dans le fichier JSON
     with open(question_reponse_file, "w") as f:
         json.dump(question_reponse, f, indent=4)
-    
-    # Préparation du document pour Solr
+
+    solr.delete(q='*:*')  # '*' représente tous les documents
+    solr.commit()  # Appliquer la suppression avec un commit
+
     document = {
-        'id': qa.id,
-        'question': qa.question,
-        'reponse': qa.reponse,
-        'timestamp': qa.timestamp
+        'ids': [entry['id'] for entry in question_reponse],
+        'questions': [entry['question'] for entry in question_reponse],
+        'reponses': [entry['reponse'] for entry in question_reponse],
+        'timestamp': [entry['timestamp'] for entry in question_reponse],
     }
+
     try:
         solr.add([document], commit=True)
         print("Document ajouté dans Solr :", document)
     except Exception as e:
         print("Erreur lors de l'ajout du document dans Solr :", e)
+    
+    
+def recuperer_chatlogs():
 
+    # Récupérer les 100 derniers documents
+    chatlogs = solr.search('*:*', rows=100, sort="timestamp desc")
+    last_log = next(iter(chatlogs), None)
+    
+    if last_log:
+        return [
+            {
+                'ids': doc.get('ids'),
+                'contents': [[question, reponse] for question, reponse in zip(doc.get('questions'), doc.get('reponses'))],
+                'time': doc.get('timestamp')[0].split('T')[0]
+            }
+            for doc in chatlogs
+        ]
+    else:
+        return [
+            {
+                'ids': "",
+                'contents': [["No history", "No history"]],
+                'timestamps': ""
+            } 
+        ]
+    
+@app.get("/chatlogs", response_class=HTMLResponse)
+async def page_chatlogs(request: Request):
+    return templates.TemplateResponse("chatlogs.html", {"request": request, "logging":recuperer_chatlogs()})
+
+def vider_historique():
+    solr.delete(q='*:*')  # '*' représente tous les documents
+    solr.commit()  # Appliquer la suppression avec un commit
+    return [
+            {
+                'ids': "",
+                'contents': [["No history", "No history"]],
+                'timestamps': ""
+            } 
+        ]
+
+@app.get("/clean_chatlogs", response_class=HTMLResponse)
+async def page_chatlogs_no_logging(request: Request):
+    return templates.TemplateResponse("chatlogs.html", {"request": request, "logging": vider_historique()})
 
 @app.get("/", response_class=HTMLResponse)
 async def root(request: Request):
@@ -115,7 +157,6 @@ async def ask_bot(request: Request):
     # Ajout de la réponse du bot au contexte
     conversation_context.append({'role': 'assistant', 'content': bot_response})
     # print("Contexte après ajout de la réponse :", conversation_context)
-
     
     # Enregistrement de l'échange dans l'historique et indexation dans Solr
     temp_qa = QA(question=user_input, reponse=bot_response)

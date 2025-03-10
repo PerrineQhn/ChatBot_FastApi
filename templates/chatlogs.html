@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Logs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
+    <!-- Lien vers la feuille de style -->
+    <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+</head>
+<body>
+    <div class="secondary-functions-box">
+        <div class="secondary-functions-wrapper">
+          <button><a href="{{ url_for('root') }}">Chat</a></button>
+          <button><a href="{{ url_for('page_chatlogs_no_logging') }}">Clear History</a></button>
+        </div>
+    </div>
+    <div class="chat-wrapper">
+        <header class="chat-header">
+          <h1>Chatbot <img src="{{ url_for('static', path='logo.svg') }}" alt="Logo Chatbot" class="chat-logo"/> </h1>
+        </header>
+        <main class="chat-messages" id="chat-messages">
+            {% block content %}
+            <p>{{ logging[0].time }}</p>
+            {% for document in logging %}
+            {% for content in document.contents %}
+            <div class="log-question chat-message user-message"><p><b>Question</b> : {{ content[0] }}</p></div>
+            <div class="log-reponse chat-message bot-message"><p><b>Réponse</b> : {{ content[1] }}</p></div> 
+            {% endfor %}
+            <br>
+            {% endfor %}
+            {% endblock %}
+        </main>
+      </div>
+</body>
+</html>

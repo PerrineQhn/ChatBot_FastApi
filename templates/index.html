@@ -14,6 +14,11 @@
   <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
 </head>
 <body>
+  <div class="secondary-functions-box">
+    <div class="secondary-functions-wrapper">
+      <button><a href="{{ url_for('page_chatlogs') }}">Historique</a></button>
+    </div>
+  </div>
   <div class="chat-wrapper">
     <header class="chat-header">
       <h1>Chatbot <img src="{{ url_for('static', path='logo.svg') }}" alt="Logo Chatbot" class="chat-logo"/> </h1>
