@@ -120,6 +120,7 @@ async def page_chatlogs(request: Request):
 def vider_historique():
     solr.delete(q='*:*')  # '*' représente tous les documents
     solr.commit()  # Appliquer la suppression avec un commit
+    question_reponse.clear()
     return [
             {
                 'ids': "",
@@ -135,6 +136,10 @@ async def page_chatlogs_no_logging(request: Request):
 @app.get("/", response_class=HTMLResponse)
 async def root(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
+
+@app.get("/ask", response_class=HTMLResponse)
+async def askpage(request: Request):
+    return templates.TemplateResponse("chat.html", {"request": request, "donnee":question_reponse})
 
 @app.post("/ask")
 async def ask_bot(request: Request):
