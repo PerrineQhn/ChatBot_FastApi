@@ -1,15 +1,15 @@
 # ChatBot_FastApi
 
-Auteurs : LI Zhongjie & QUENNEHEN Perrine
+**Auteurs :** LI Zhongjie & QUENNEHEN Perrine
 
 ---
 
-Chatbot IA est une application web basée sur FastAPI qui propose un chatbot intelligent. Le projet intègre plusieurs fonctionnalités :
+**Chatbot IA** est une application web basée sur **FastAPI** permettant d'interagir avec un chatbot intelligent. Le projet propose :
 
-- **Interface web interactive** : Utilisation de Jinja2 pour les templates HTML, CSS pour le style moderne et JavaScript pour les interactions (auto-scroll, envoi via la touche Entrée, etc.).
-- **Gestion du contexte de conversation** : Le chatbot garde en mémoire l'historique de la conversation afin d'améliorer la pertinence des réponses.
-- **Indexation des échanges avec Solr** : Les échanges sont indexés dans Solr pour permettre de rechercher facilement l'historique.
-- **Lancement automatique de services** : Le module `open_app.py` permet de démarrer automatiquement le serveur Solr et le serveur Ollama au démarrage de l'application.
+- **Interface web interactive :** Templates HTML avec Jinja2, style CSS moderne et interactions JavaScript intuitives (auto-scroll, envoi via Entrée, etc.).
+- **Gestion contextuelle des conversations :** Maintien de l'historique des échanges pour améliorer la pertinence des réponses.
+- **Indexation des échanges avec Solr :** Enregistrement des conversations dans Solr pour faciliter les recherches ultérieures.
+- **Lancement automatique des services :** Démarrage automatique des serveurs Solr et Ollama via un script d'entrée (`entrypoint.sh`).
 
 ---
 
@@ -17,131 +17,137 @@ Chatbot IA est une application web basée sur FastAPI qui propose un chatbot int
 
 - [Prérequis](#prérequis)
 - [Structure du projet](#structure-du-projet)
-- [Installation](#installation)
+- [Installation avec Docker](#installation-avec-docker)
+- [Installation manuelle](#installation-manuelle)
+- [Lancement manuel](#lancement-manuel)
 - [Configuration](#configuration)
-- [Lancement de l'application](#lancement-de-lapplication)
 - [Fonctionnalités](#fonctionnalités)
 
 ---
 
 ## Prérequis
 
-- Docker
-- Ou manuellement : 
-  - **Python 3.12** (ou version compatible)
-  - Les packages Python suivants :
-    - FastAPI
-    - Uvicorn
-    - Jinja2
-    - Pydantic
-    - pysolr
-    - ollama
-  - **Solr** installé et configuré (le core `chatlogs` doit être accessible sur `localhost:8983`)
-  - **Ollama** installé et accessible via la commande `ollama serve`
+- **Docker** (recommandé)
+
+Sinon, pour une installation manuelle :
+- **Python 3.12** ou supérieur
+- **Solr 8.11.2**
+- **Ollama**
+- Packages Python :
+  - FastAPI
+  - Uvicorn
+  - Jinja2
+  - Pydantic
+  - pysolr
+  - ollama
 
 ---
 
 ## Structure du projet
 
-La structure du projet ressemble à :
-
 ```
 ChatBot_FastApi/
-├── app.py                 # Application FastAPI principale
-├── qa.json                # Fichier JSON pour sauvegarder l'historique des échanges (géré dans static)
-├── requirements.txt       # Liste des dépendances Python
-├── templates/             # Dossier des templates HTML
-│   ├── index.html         # Page principale du chatbot
-│   └── chat.html          # Template d'affichage des échanges
-├── static/                # Fichiers statiques (CSS, JavaScript, images, etc.)
-│   ├── style.css          # Feuille de style pour l'interface
-│   ├── script.js          # Script JavaScript pour les interactions (auto-scroll, etc.)
-│   ├── open_app.py        # Module pour lancer Solr et Ollama
-│   └── logo.svg           # Logo du chatbot
-└── chatlogs.zip           # Dossier contenant les fichiers pour solr (à dézipper et à copier-coller dans son dossier solr)
-    
+├── app.py                     # Application FastAPI principale
+├── qa.json                    # Historique des échanges sauvegardé (dans static)
+├── dockerfile                 # Instructions pour créer l'image Docker
+├── entrypoint.sh              # Script de lancement automatique des services
+├── requirements.txt           # Dépendances Python
+├── templates/                 # Templates HTML
+│   ├── index.html             # Page d'accueil
+│   ├── chat.html              # Affichage des échanges
+│   └── chatlogs.html          # Page d'historique des logs
+├── static/                    # Ressources statiques
+│   ├── __init__.py            # Module d'initialisation
+│   ├── style.css              # Styles CSS
+│   ├── script.js              # Scripts JS pour interactions
+│   ├── open_app.py            # Fonctions pour démarrer Solr et Ollama
+│   └── logo.svg               # Logo du chatbot
+└── chatlogs.zip               # Configuration Solr pour le core "chatlogs"
 ```
 
-> **Note :** Le fichier `qa.json` peut être créé ou vidé automatiquement par l'application. Il est situé dans le dossier `static`.
+> **Note :** `qa.json` est automatiquement géré par l'application.
 
 ---
 
-## Installation
+## Installation avec Docker
 
-1. **Clonez le dépôt :**
+**1. Construire l'image Docker :**
 
-   ```bash
-   git clone https://github.com/PerrineQhn/ChatBot_FastApi
-   cd ChatBot_FastApi
-   ```
+```bash
+docker build -t chatbot_fastapi .
+```
 
-2. **Créez un environnement virtuel (optionnel mais recommandé) :**
+**2. Exécuter l'application via Docker :**
 
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate  # Sur Windows : venv\Scripts\activate
-   ```
+```bash
+docker run -p 8000:8000 -v ollama:/root/.ollama -v solr_data:/app/solr/server/solr chatbot_fastapi
+```
 
-3. **Installez les dépendances :**
-
-   Installer le fichier `requirements.txt` :
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-   Sinon, installez manuellement :
-
-   ```bash
-   pip install fastapi uvicorn jinja2 pydantic pysolr ollama
-   ```
-
-   Installer également le modèle llama3.2 de Ollama :
-
-   ```bash
-   ollama run llama3.2
-   ```
+Accès : [http://localhost:8000](http://localhost:8000)
 
 ---
 
-## Configuration
+## Installation manuelle
 
-- **Templates et fichiers statiques**  
-  L'application est configurée pour rechercher les templates dans le dossier `templates` et les fichiers statiques dans le dossier `static`.  
+**1. Cloner le dépôt :**
 
-- **Solr et Ollama**  
-  Le module `static/open_app.py` contient les fonctions `start_solr()` et `start_ollama()` qui démarrent les services externes.  
-  Vous pouvez modifier ces fonctions selon votre configuration (par exemple, en utilisant un chemin absolu pour Ollama ou en adaptant la commande de lancement de Solr).
+```bash
+git clone https://github.com/PerrineQhn/ChatBot_FastApi
+cd ChatBot_FastApi
+```
 
-- **Gestion du contexte de conversation**  
-  Les échanges sont stockés dans un fichier JSON (`qa.json`) et indexés dans Solr. Le contexte de la conversation est conservé dans une variable globale pour la démonstration.
+**2. Installer les dépendances Python :**
+
+```bash
+pip install -r requirements.txt
+```
+
+**3. Installer Ollama :**
+
+```bash
+curl -fsSL https://ollama.com/install.sh | sh
+ollama serve
+ollama pull llama3.2
+```
+
+**4. Installer Apache Solr :**
+
+```bash
+wget https://archive.apache.org/dist/lucene/solr/8.11.2/solr-8.11.2.tgz
+tar xzf solr-8.11.2.tgz
+solr-8.11.2/bin/solr start
+solr-8.11.2/bin/solr create -c chatlogs
+```
 
 ---
 
-## Lancement de l'application
+## Lancement manuel
 
-Pour lancer l'application (soyez dans le dossier `ChatBot_FastApi/`):
+Lancer FastAPI depuis la racine du projet :
 
 ```bash
 uvicorn app:app
 ```
 
-L'application sera accessible à l'adresse [http://127.0.0.1:8000](http://127.0.0.1:8000) (indiqué dans le terminal).
+Application accessible via [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
-Lors du démarrage, le gestionnaire de durée de vie (via un `lifespan`) appelle les fonctions du module `open_app.py` pour démarrer Solr et Ollama.
+---
+
+## Configuration
+
+- **Templates et statiques :** situés dans `templates` et `static`.
+- **Services externes (Solr, Ollama) :**
+  - Modifiables via `static/open_app.py`.
+- **Historique des échanges :**
+  - Stockage JSON (`qa.json`).
+  - Indexation Solr automatique.
 
 ---
 
 ## Fonctionnalités
 
-- **Interface utilisateur moderne et responsive** :  
-  L'interface est construite avec HTML, CSS et JavaScript. Elle s'adapte aux différents écrans et propose une expérience utilisateur fluide.
+- **Interface moderne et responsive** : HTML/CSS/JS adaptable et intuitive.
+- **Conversation contextuelle** : historique utilisé par l'IA.
+- **Indexation avec Solr** : simplification des recherches sur les conversations.
+- **Services automatisés** : démarrage simultané et automatique de Solr et Ollama à chaque lancement via Docker ou le script d'entrée (`entrypoint.sh`).
 
-- **Conversation contextuelle** :  
-  L'historique de la conversation est transmis au modèle AI pour améliorer la pertinence des réponses.
-
-- **Indexation des échanges dans Solr** :  
-  Chaque échange est indexé dans Solr, ce qui permet une recherche et une analyse ultérieure des conversations.
-
-- **Démarrage automatique des services** :  
-  Au lancement de l'application, le serveur Solr et le serveur Ollama sont démarrés automatiquement via des fonctions Python dans `open_app.py`.
