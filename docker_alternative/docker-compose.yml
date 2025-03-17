@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - solr
+      - ollama
+    networks:
+      - app-network  # Le service web utilise ce réseau
+
+  solr:
+    image: solr:9
+    container_name: solr
+    ports:
+      - "8983:8983"
+    command: solr-precreate chatlogs
+    networks:
+      - app-network  # Le service solr utilise ce réseau
+
+  ollama:
+    image: ollama/ollama
+    container_name: ollama
+    restart: always
+    ports:
+      - "11434:11434"
+    volumes:
+      - ./data:/root/.ollama  # Sauvegarde les modèles pour éviter de les retélécharger
+    entrypoint: ["/bin/sh"]  # Remplace l'ENTRYPOINT par un shell
+    command: ["-c", "ollama serve & sleep 5 && ollama pull llama3.2 && wait"]  # Exécute la commande shell
+    networks:
+      - app-network  # Le service ollama utilise ce réseau
+
+networks:
+  app-network:
+    driver: bridge  # Utilise le réseau "bridge" pour la communication entre conteneurs
