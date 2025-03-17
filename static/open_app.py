@@ -1,36 +1,47 @@
 import subprocess
 import sys
 import os
+import shutil
 
 def start_ollama():
+    # Vérifier si la commande "ollama" existe
+    if shutil.which("ollama") is None:
+        print("La commande 'ollama' n'est pas disponible dans ce container, on passe son démarrage.")
+        return
+
     if sys.platform.startswith("darwin"):
-        # Ouvre l'application Terminal et exécute "ollama serve"
+        # macOS : ouvre Terminal via AppleScript
         command = 'tell application "Terminal" to do script "ollama serve"'
         subprocess.Popen(["osascript", "-e", command])
     elif sys.platform.startswith("linux"):
-        # Ouvre GNOME Terminal et exécute "ollama serve", puis garde le terminal ouvert
-        subprocess.Popen([
-            'gnome-terminal', '--', 'bash', '-c', 'ollama serve; exec bash'
-    ])
+        # Si pas d'affichage graphique (headless/Docker) : exécuter directement la commande
+        if os.environ.get("DISPLAY") is None:
+            subprocess.Popen(["ollama", "serve"])
+        else:
+            # Dans un environnement graphique, lancer dans GNOME Terminal
+            subprocess.Popen([
+                'gnome-terminal', '--', 'bash', '-c', 'ollama serve; exec bash'
+            ])
     elif sys.platform.startswith("win"):
-        # Ouvre le terminal Windows et exécute "ollama serve"
         subprocess.Popen(["cmd.exe", "/c", "start", "ollama", "serve"])
 
 def start_solr():
-    if sys.platform.startswith("darwin"):
-        # macOS
-        solr_dir = os.path.join(os.path.expanduser("/opt/homebrew/bin/"))
-        command = ["solr", "start"]  # commande à exécuter depuis le dossier Solr
-    elif sys.platform.startswith("linux"):
-        # Linux
+    # Privilégier le répertoire /app/solr s'il existe (installé via le Dockerfile)
+    if os.path.exists("/app/solr"):
+        solr_dir = "/app/solr"
+    else:
         solr_dir = os.path.join(os.path.expanduser("~"), "solr")
-        command = ["bin/solr", "start"]
-
     if not os.path.exists(solr_dir):
         print("Le dossier Solr n'existe pas :", solr_dir)
         return
 
-    # Exécute la commande depuis le dossier Solr
+    # Choix de la commande selon la plateforme
+    if sys.platform.startswith("linux") or sys.platform.startswith("darwin"):
+        command = ["bin/solr", "start", "-force"]
+    elif sys.platform.startswith("win"):
+        command = ["solr", "start"]
+
+    # Se positionner dans le dossier de Solr et lancer la commande
     os.chdir(solr_dir)
     subprocess.Popen(command)
 
