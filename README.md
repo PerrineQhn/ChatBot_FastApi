@@ -26,16 +26,18 @@ Chatbot IA est une application web basée sur FastAPI qui propose un chatbot int
 
 ## Prérequis
 
-- **Python 3.12** (ou version compatible)
-- Les packages Python suivants :
-  - FastAPI
-  - Uvicorn
-  - Jinja2
-  - Pydantic
-  - pysolr
-  - ollama
-- **Solr** installé et configuré (le core `chatlogs` doit être accessible sur `localhost:8983`)
-- **Ollama** installé et accessible via la commande `ollama serve`
+- Docker
+- Ou manuellement : 
+  - **Python 3.12** (ou version compatible)
+  - Les packages Python suivants :
+    - FastAPI
+    - Uvicorn
+    - Jinja2
+    - Pydantic
+    - pysolr
+    - ollama
+  - **Solr** installé et configuré (le core `chatlogs` doit être accessible sur `localhost:8983`)
+  - **Ollama** installé et accessible via la commande `ollama serve`
 
 ---
 
