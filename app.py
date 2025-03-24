@@ -77,8 +77,12 @@ def util_ajouter_QA(qa: QA):
     with open(question_reponse_file, "w") as f:
         json.dump(question_reponse, f, indent=4)
 
-    solr.delete(q="*:*")  # '*' représente tous les documents
-    solr.commit()  # Appliquer la suppression avec un commit
+    latest_doc = solr.search(q="*:*", sort="timestamp desc", rows=1)
+    if latest_doc.hits > 0:
+        doc_id = latest_doc.docs[0]['id'] 
+        print(doc_id)
+        solr.delete(id=doc_id)  # Suppression du dernier document
+        solr.commit()  # Appliquer la suppression
 
     document = {
         "ids": [entry["id"] for entry in question_reponse],
@@ -110,7 +114,7 @@ def recuperer_chatlogs():
                         doc.get("questions"), doc.get("reponses")
                     )
                 ],
-                "time": doc.get("timestamp")[0].split("T")[0],
+                "time": "Date : " + doc.get("timestamp")[0].split("T")[0] + "\nTime : " + doc.get("timestamp")[0].split("T")[1].split('.')[0],
             }
             for doc in chatlogs
         ]

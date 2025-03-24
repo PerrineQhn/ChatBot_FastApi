@@ -47,6 +47,14 @@ Les solutions existantes sur le marché incluent divers chatbots et assistants v
   - Efficacité variable selon les langues, surtout pour les moins courantes
   - Intégration complexe avec des systèmes externes non-IBM
   - Interface moins adaptable que notre solution prévue avec HTML/CSS et Jinja
+#### ChatGPT :
+- Points forts :
+  - Le ChatGPT pourrait générer automatiquement les titres de chaque conversation. Pourtant, notre chatbot donne un datetime pour chaque conversation.
+  - Dans le ChatGPT, chaque conversation est représenté dans une page individuelle, alors qu'ici toutes les historiques sont dans la même page.
+  - Le ChatGPT propose une IA plus puissante avec environ 500 milliards et 1 trilions de paramètres. Alors que le nôtre, qui est llama3.2-3b n'a que 3 milliards de paramètres.
+  - Le ChatGPT peut prendre et analyser des fichiers locaux joints tels que l'image, le fichier texte, le pdf, etc, ce qui n'est pas possible dans notre chatbot.
+- Limitations : 
+-   inon, l'utilisateur ne peut que utiliser un modèle moins performant.
 
 
 ## Identité graphique :

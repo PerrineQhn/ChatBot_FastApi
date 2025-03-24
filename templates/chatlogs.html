@@ -24,8 +24,8 @@
         </header>
         <main class="chat-messages" id="chat-messages">
             {% block content %}
-            <p>{{ logging[0].time }}</p>
             {% for document in logging %}
+            <p>{{ document.time }}</p>
             {% for content in document.contents %}
             <div class="log-question chat-message user-message"><p><b>Question</b> : {{ content[0] }}</p></div>
             <div class="log-reponse chat-message bot-message"><p><b>Réponse</b> : {{ content[1] }}</p></div> 
