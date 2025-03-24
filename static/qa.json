@@ -1,8 +1,14 @@
 [
     {
-        "question": "wsh wsh ?",
-        "reponse": "It seems like you're typing in a playful, nonsensical way!\n\nIf I had to respond with a similar pattern, I'd say:\n\nwsh wsh wsh",
-        "id": "17bd8100aea4402093365b50e18f61ed",
-        "timestamp": "2025-03-24T15:48:33.482302Z"
+        "question": "hey",
+        "reponse": "How can I assist you today?",
+        "id": "2dca81490588490a885619509f4d3045",
+        "timestamp": "2025-03-24T16:21:02.519549Z"
+    },
+    {
+        "question": "you good ?",
+        "reponse": "I'm just a language model, so I don't have emotions or feelings like humans do. But I'm functioning properly and ready to help with any questions or tasks you may have! How about you? How's your day going?",
+        "id": "8ba2e0cdbc034695825a7eac81b19911",
+        "timestamp": "2025-03-24T16:21:10.769478Z"
     }
 ]

@@ -40,6 +40,7 @@ app.mount("/static", StaticFiles(directory=str(BASE_DIR / "static")), name="stat
 # Historique global de la conversation (pour la démo)
 conversation_context = []
 question_reponse = []
+first_ajout_flag = True
 question_reponse_file = BASE_DIR / "static/qa.json"
 
 
@@ -64,6 +65,7 @@ def safe_text(text):
 
 
 def util_ajouter_QA(qa: QA):
+    global first_ajout_flag
     # Génération d'un ID unique et d'un timestamp
     qa.id = uuid4().hex
     qa.timestamp = datetime.datetime.now().isoformat() + "Z"
@@ -77,12 +79,13 @@ def util_ajouter_QA(qa: QA):
     with open(question_reponse_file, "w") as f:
         json.dump(question_reponse, f, indent=4)
 
-    latest_doc = solr.search(q="*:*", sort="timestamp desc", rows=1)
-    if latest_doc.hits > 0:
-        doc_id = latest_doc.docs[0]['id'] 
-        print(doc_id)
-        solr.delete(id=doc_id)  # Suppression du dernier document
-        solr.commit()  # Appliquer la suppression
+    if not first_ajout_flag:
+        latest_doc = solr.search(q="*:*", sort="timestamp desc", rows=1)
+        if latest_doc.hits > 0:
+            doc_id = latest_doc.docs[0]['id'] 
+            print(doc_id)
+            solr.delete(id=doc_id)  # Suppression du dernier document
+            solr.commit()  # Appliquer la suppression
 
     document = {
         "ids": [entry["id"] for entry in question_reponse],
@@ -93,6 +96,8 @@ def util_ajouter_QA(qa: QA):
 
     try:
         solr.add([document], commit=True)
+        if first_ajout_flag:
+            first_ajout_flag = False
         print("Document ajouté dans Solr :", document)
     except Exception as e:
         print("Erreur lors de l'ajout du document dans Solr :", e)
