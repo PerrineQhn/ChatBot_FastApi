@@ -49,12 +49,13 @@ Les solutions existantes sur le marché incluent divers chatbots et assistants v
   - Interface moins adaptable que notre solution prévue avec HTML/CSS et Jinja
 #### ChatGPT :
 - Points forts :
-  - Le ChatGPT pourrait générer automatiquement les titres de chaque conversation. Pourtant, notre chatbot donne un datetime pour chaque conversation.
-  - Dans le ChatGPT, chaque conversation est représenté dans une page individuelle, alors qu'ici toutes les historiques sont dans la même page.
-  - Le ChatGPT propose une IA plus puissante avec environ 500 milliards et 1 trilions de paramètres. Alors que le nôtre, qui est llama3.2-3b n'a que 3 milliards de paramètres.
-  - Le ChatGPT peut prendre et analyser des fichiers locaux joints tels que l'image, le fichier texte, le pdf, etc, ce qui n'est pas possible dans notre chatbot.
+  - Génération automatique de titres pour chaque conversation.
+  - Une page individuelle pour chaque conversation au lieu de rassembler toute dans une seule page.
+  - Une IA plus puissante avec environ 500 milliards et 1 trilions de paramètres.
+  - Possibilité de prendre et analyser des fichiers locaux joints tels que l'image, le fichier texte, le pdf, etc, ce qui n'est pas possible dans notre chatbot.
+  - Capacité de générer des équations et du code dans des formats adéquats pour une meilleure visibilité.
 - Limitations : 
-- Le meilleur modèle du ChatGPT a une limite de tokens entrés et sortis, ce qui nécessite un abonnement quand la limite est atteinte. Sinon, l'utilisateur ne peut que utiliser un modèle moins performant.
+  - L'accès limité au meilleur modèle du ChatGPT (GPT4o). Ce dernier nécessite un abonnement quand la limite de tokens sortis ou entrés est atteinte. Sinon, l'utilisateur doit attendre quelques heures pour la réinitialisation ou il ne peut que utiliser un modèle moins performant.
 
 #### Google Gemini (anciennement Bard)
 - Points forts :
