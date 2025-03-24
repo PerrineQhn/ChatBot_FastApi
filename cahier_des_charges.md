@@ -29,6 +29,26 @@ Utilisateurs recherchant une assistance automatisée et accessible 24/7, incluan
 
 Les solutions existantes sur le marché incluent divers chatbots et assistants virtuels (ex. ChatGPT, IBM Watson).
 
+### Comparaison avec les concurrents, différences au niveau des fonctionnalités
+
+#### IBM Watson Assistant
+
+- Points forts :
+
+  - Interface web intuitive avec tableau de bord analytique pour le suivi des interactions
+  - Compréhension avancée du langage naturel grâce à des modèles NLP sophistiqués
+  - Support de nombreuses langues pour une utilisation internationale
+  - Réponses contextuelles et conservation de l'historique des conversations
+  - Modèles de conversation prédéfinis pour un déploiement rapide
+
+- Limitations :
+  - Nécessite un abonnement mensuel après 30 jours d'essai gratuit
+  - Restrictions d'utilisation à 10 000 documents et 10 000 requêtes mensuelles
+  - Efficacité variable selon les langues, surtout pour les moins courantes
+  - Intégration complexe avec des systèmes externes non-IBM
+  - Interface moins adaptable que notre solution prévue avec HTML/CSS et Jinja
+
+
 ## Identité graphique :
 
 - Typographie moderne et lisible :
