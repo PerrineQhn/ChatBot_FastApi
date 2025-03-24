@@ -56,6 +56,45 @@ Les solutions existantes sur le marché incluent divers chatbots et assistants v
 - Limitations : 
 - Le meilleur modèle du ChatGPT a une limite de tokens entrés et sortis, ce qui nécessite un abonnement quand la limite est atteinte. Sinon, l'utilisateur ne peut que utiliser un modèle moins performant.
 
+#### Google Gemini (anciennement Bard)
+- Points forts :
+  - Accès direct aux informations récentes du web via l'intégration avec le moteur de recherche Google
+  - Capacité à générer et modifier du code dans plusieurs langages de programmation
+  - Interface épurée avec historique des conversations accessible facilement
+  - Intégration native avec les autres services Google (Gmail, Docs, Drive)
+  - Fonctionnalité d'exportation des conversations vers Google Docs
+  - Capacité à traiter et analyser des images téléchargées
+  - Support multilingue de haute qualité avec traduction intégrée
+  - Interaction avec YouTube pour analyser et résumer des vidéos
+
+- Limitations :
+  - Absence d'une version entièrement gratuite pour un usage professionnel illimité
+  - Personnalisation limitée pour les besoins spécifiques d'une entreprise
+  - Dépendance à l'écosystème Google pour certaines fonctionnalités avancées
+  - Impossibilité d'héberger la solution sur des serveurs privés
+  - Options limitées pour l'analyse détaillée des interactions utilisateurs
+
+
+#### Notre Chatbot (basé sur Llama 3.2)
+- Points forts :
+  - Solution sur mesure
+  - Design responsive s'adaptant parfaitement aux mobiles, tablettes et ordinateurs
+  - Stockage flexible des conversations (base de données ou fichiers JSON) selon vos préférences
+  - Gestion complète de l'historique des conversations accessible aux utilisateurs
+  - Modèle Llama 3.2 offrant d'excellentes performances de compréhension du langage naturel
+  - Hébergement possible sur vos propres serveurs pour une maîtrise totale des données
+  - Absence de limitations arbitraires sur le nombre de requêtes ou de documents
+  - Aucun abonnement
+
+- Limitations :
+  - Nécessite un développement initial plus important que l'utilisation d'une solution clé en main
+  - Maintenance et mises à jour à gérer en interne
+  - Fonctionnalités analytiques potentiellement moins avancées que celles des solutions d'entreprise
+  - Absence de modèles de conversation prédéfinis
+  - Support multilingue identique aux langues supportées par Llama3.2
+  - Peu ou pas d'intégrations prédéfinies avec d'autres services (à développer selon besoins)
+  - Performances du modèle Llama 3.2 potentiellement variables selon la complexité des requêtes
+
 ## Identité graphique :
 
 - Typographie moderne et lisible :
