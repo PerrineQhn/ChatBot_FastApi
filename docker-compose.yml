@@ -4,5 +4,8 @@ services:
     ports:
       - "8001:8000"
     volumes:
-      - /root/.ollama:/root/.ollama
-      - /app/solr/server/solr:/app/solr/server/solr
+      - ollama_data:/root/.ollama
+      - solr_data:/app/solr/server/solr
+volumes:
+  ollama_data:
+  solr_data:

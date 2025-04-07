@@ -30,6 +30,7 @@
 - **Docker** (recommandé)
 
 Sinon, pour une installation manuelle :
+
 - **Python 3.12** ou supérieur
 - **Solr 8.11.2**
 - **Ollama**
@@ -80,10 +81,16 @@ docker build -t chatbot_fastapi .
 **2. Exécuter l'application via Docker :**
 
 ```bash
-docker run -p 8000:8000 -v ollama:/root/.ollama -v solr_data:/app/solr/server/solr chatbot_fastapi
+docker compose up --build
 ```
 
-Accès : [http://localhost:8000](http://localhost:8000)
+Accès : [http://localhost:8001](http://localhost:8001)
+
+**3. Vérification de la connexion au serveur**
+
+```bash
+curl http://localhost:8001
+```
 
 ---
 
@@ -150,4 +157,3 @@ Application accessible via [http://127.0.0.1:8000](http://127.0.0.1:8000)
 - **Conversation contextuelle** : historique utilisé par l'IA.
 - **Indexation avec Solr** : simplification des recherches sur les conversations.
 - **Services automatisés** : démarrage simultané et automatique de Solr et Ollama à chaque lancement via Docker ou le script d'entrée (`entrypoint.sh`).
-
