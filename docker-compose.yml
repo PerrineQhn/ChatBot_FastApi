@@ -1,0 +1,8 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8001:8000"
+    volumes:
+      - /root/.ollama:/root/.ollama
+      - /app/solr/server/solr:/app/solr/server/solr
